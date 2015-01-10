@@ -1,0 +1,25 @@
+{
+  "name": "building_blocks",
+  "version": "1.0.0",
+  "description": "Code school expressjs examples",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seeker8/codeschool-examples.git"
+  },
+  "keywords": [
+    "expressjs"
+  ],
+  "author": "seeker8",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seeker8/codeschool-examples/issues"
+  },
+  "homepage": "https://github.com/seeker8/codeschool-examples",
+  "dependencies": {
+    "express": "^4.10.7"
+  }
+}
