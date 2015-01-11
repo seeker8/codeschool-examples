@@ -1,5 +1,8 @@
 var express = require('express'),
-    app = express();
+    app = express(),
+    logger = require('./logger');
+
+app.use(logger);
 
 app.use(express.static('public'));
 
