@@ -25,9 +25,10 @@ app.get('/blocks', function(request, response){
 
 app.get('/blocks/:name', function(request, response){
     var name = request.params.name,
-        description = jsonBlocks[name];
+        block = name[0].toUpperCase() + name.slice(1).toLowerCase();
+        description = jsonBlocks[block];
     if(!description){
-    	response.status(404).json("No description found for " + name);
+    	response.status(404).json("No description found for " + block);
     }
     response.json(description);
 });
