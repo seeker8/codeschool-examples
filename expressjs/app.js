@@ -11,6 +11,12 @@ app.use(logger);
 
 app.use(express.static('expressjs/public'));
 
+app.param('name', function(request, response, next){
+    var name = request.params.name;
+    request.blockName = name[0].toUpperCase() + name.slice(1).toLowerCase();
+	next();
+});
+
 app.get('/blocks', function(request, response){
 	var limit = request.query.limit;
 
@@ -23,11 +29,9 @@ app.get('/blocks', function(request, response){
 });
 
 app.get('/blocks/:name', function(request, response){
-    var name = request.params.name,
-        block = name[0].toUpperCase() + name.slice(1).toLowerCase();
-        description = blocks[block];
+    var description = blocks[request.blockName];
     if(!description){
-    	response.status(404).json("No description found for " + block);
+    	response.status(404).json("No description found for " + request.blockName);
     }
     response.json(description);
 });
