@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/seeker8/codeschool-examples",
   "dependencies": {
+    "body-parser": "^1.10.1",
     "express": "^4.10.7"
   }
 }

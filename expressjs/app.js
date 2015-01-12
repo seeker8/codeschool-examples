@@ -1,6 +1,8 @@
 var express = require('express'),
     app = express(),
     logger = require('./logger'),
+    bodyParser = require('body-parser'),
+    parseUrlEncoded = bodyParser.urlencoded({extended: false}),
     blocks = {
     	'Fixed': 'Fastened securely in position',
     	'Movable': 'Capable of being moved',
@@ -34,6 +36,13 @@ app.get('/blocks/:name', function(request, response){
     	response.status(404).json("No description found for " + request.blockName);
     }
     response.json(description);
+});
+
+app.post('/blocks', parseUrlEncoded, function(request, response){
+    var newBlock = request.body;
+    blocks[newBlock.name] = newBlock.description;
+    
+    response.status(201).json(newBlock.name);
 });
 
 app.listen(3000, function(){
