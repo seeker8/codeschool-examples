@@ -1,7 +1,7 @@
 var express = require('express'),
     app = express(),
     logger = require('./logger'),
-    jsonBlocks = {
+    blocks = {
     	'Fixed': 'Fastened securely in position',
     	'Movable': 'Capable of being moved',
     	'Rotating': 'Moving in a circle around its center'
@@ -9,24 +9,23 @@ var express = require('express'),
 
 app.use(logger);
 
-app.use(express.static('public'));
+app.use(express.static('expressjs/public'));
 
 app.get('/blocks', function(request, response){
-	var blocks = ['Fixed', 'Movable', 'Rotating'],
-	    limit = request.query.limit;
+	var limit = request.query.limit;
 
 	//User Params
 	if(limit >= 0){
         response.json(blocks.slice(0, limit));
 	} else {
-	    response.json(blocks);
+	    response.json(Object.keys(blocks));
     }
 });
 
 app.get('/blocks/:name', function(request, response){
     var name = request.params.name,
         block = name[0].toUpperCase() + name.slice(1).toLowerCase();
-        description = jsonBlocks[block];
+        description = blocks[block];
     if(!description){
     	response.status(404).json("No description found for " + block);
     }
