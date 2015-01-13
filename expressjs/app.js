@@ -4,22 +4,22 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     parseUrlEncoded = bodyParser.urlencoded({extended: false}),
     blocks = {
-    	'Fixed': 'Fastened securely in position',
-    	'Movable': 'Capable of being moved',
-    	'Rotating': 'Moving in a circle around its center'
+        'Fixed': 'Fastened securely in position',
+        'Movable': 'Capable of being moved',
+        'Rotating': 'Moving in a circle around its center'
     };
 
 app.use(logger);
 
 app.use(express.static('expressjs/public'));
 
-app.param('name', function(request, response, next){
+app.param('name', function(request, response, next ){
     var name = request.params.name;
     request.blockName = name[0].toUpperCase() + name.slice(1).toLowerCase();
 	next();
 });
 
-app.get('/blocks', function(request, response){
+app.get('/blocks', function (request, response){
 	var limit = request.query.limit;
 
 	//User Params
