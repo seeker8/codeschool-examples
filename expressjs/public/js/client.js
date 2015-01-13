@@ -8,7 +8,7 @@ $(function(){
 		for(var i in blocks){
             block = blocks[i];
             content = '<a href="/blocks/' + block + '">' + block + '</a>';
-            closespan = '<span class="glyphicon glyphicon-remove-circle"></span>';
+            closespan = '<span class="glyphicon glyphicon-remove-circle" data-block="' + block + '"></span>';
             var li = $('<li>');
             li.addClass('list-group-item');
             li.append(closespan);
@@ -34,5 +34,21 @@ $(function(){
             form.trigger('reset');
         });
         
+    });
+    
+    //DELETE requests
+    $('.block-list').on('click', 'span[data-block]', function(){
+        var $this = $(this);
+        
+        if(!confirm('Are you sure?')){
+            return false;
+        }
+        
+        $.ajax({
+            type: 'DELETE',
+            url: '/blocks/' + $this.attr('data-block')
+        }).done(function(){
+            $this.parent('li').remove();
+        });
     });
 });
